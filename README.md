@@ -1,4 +1,4 @@
-![Icon](./icon.png)
+<img src="./icon.png" alt="Icon" width="150" height="150">
 # Keycloak.ApiClient.Net 
 [![Build status](https://ci.appveyor.com/api/projects/status/c9npduu2dp9ljlps?svg=true)](https://ci.appveyor.com/project/lvermeulen/keycloak-net)
  [![license](https://img.shields.io/github/license/lvermeulen/Keycloak.ApiClient.Net.svg?maxAge=2592000)](https://github.com/lvermeulen/Keycloak.ApiClient.Net/blob/master/LICENSE) [![NuGet](https://img.shields.io/nuget/v/Keycloak.ApiClient.Net.svg?maxAge=2592000)](https://www.nuget.org/packages/Keycloak.ApiClient.Net/) ![downloads](https://img.shields.io/nuget/dt/Keycloak.ApiClient.Net)
