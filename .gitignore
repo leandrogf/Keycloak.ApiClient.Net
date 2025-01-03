@@ -328,5 +328,5 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
-/test/Keycloak.Net.Tests/appsettings.json
-/src/Keycloak.Net/.fossa.yml
+/test/Keycloak.ApiClient.Net.Tests/appsettings.json
+/src/Keycloak.ApiClient.Net/.fossa.yml
