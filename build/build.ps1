@@ -1,14 +1,12 @@
 param (
-	[string]$BuildVersionNumber=$(throw "-BuildVersionNumber is required."),
-	[string]$TagVersionNumber
+    [string]$BuildVersionNumber=$(throw "-BuildVersionNumber is required."),
+    [string]$TagVersionNumber
 )
-
-& dotnet restore --no-cache
 
 foreach ($src in ls $PSScriptRoot\..\src/*) {
     Push-Location $src
 
-	Write-Output "build: Building & packaging project in $src"
+    Write-Output "build: Building & packaging project in $src"
 
     if ($TagVersionNumber) {
         $version = $TagVersionNumber
