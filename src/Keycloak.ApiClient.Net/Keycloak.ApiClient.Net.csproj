@@ -4,20 +4,21 @@
     <TargetFramework>net9.0</TargetFramework>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <Authors>Luk Vermeulen</Authors>
-    <Copyright>Copyright 2019 by Luk Vermeulen. All rights reserved.</Copyright>
-    <PackageLicenseUrl>https://github.com/leandrogf/Keycloak.ApiClient.Net/blob/master/LICENSE</PackageLicenseUrl>
+    <Authors>Leandro Guimarães Fernandes</Authors>
+    <Copyright>Copyright 2019 by Leandro Guimarães Fernandes. All rights reserved.</Copyright>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/leandrogf/Keycloak.ApiClient.Net</PackageProjectUrl>
     <RepositoryUrl>https://github.com/leandrogf/Keycloak.ApiClient.Net</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>keycloak</PackageTags>
-    <PackageIcon>https://imgur.com/wzCmVyG</PackageIcon>
+    <PackageIcon>icon.png</PackageIcon>
     <Description>C# client for Keycloak</Description>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\..\Keycloak.ApiClient.Net.snk</AssemblyOriginatorKeyFile>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -32,6 +33,9 @@
 
   <ItemGroup>
     <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+    <None Include="..\..\LICENSE" Pack="true" PackagePath="\" />
+    <None Include="..\..\icon.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>
+
