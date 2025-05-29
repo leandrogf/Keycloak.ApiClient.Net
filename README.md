@@ -6,7 +6,7 @@ This project provides a fluent and resource-oriented interface for managing Keyc
 
 ---
 
-## 📦 Installation
+##  Installation
 
 Available via **NuGet**:
 
@@ -22,14 +22,14 @@ Install-Package Keycloak.ApiClient.Net -Version 2.0.0
 
 ---
 
-## ⚙️ Requirements
+## ️ Requirements
 
 - .NET 9.0 or higher  
 - Keycloak 17 or higher (with Admin REST API support)
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 - `src/Keycloak.ApiClient.Net`: Core source code for the client  
 - `test/Keycloak.ApiClient.Net.Tests`: Unit and integration tests  
@@ -37,23 +37,23 @@ Install-Package Keycloak.ApiClient.Net -Version 2.0.0
 
 ---
 
-## 🔧 Supported Features
+##  Supported Features
 
 The client covers a wide range of Keycloak administrative resources:
 
-- 🔐 Authentication and Authorization  
-- 👤 Users and Groups  
-- 🧑‍🤝‍🧑 Realms and Clients  
-- 🔑 Components, Roles, and Mappings  
-- 🗝️ User Storage Providers  
-- 📜 OpenID Configuration  
-- 📂 Client Scopes, Protocol Mappers, and more
+- Authentication and Authorization  
+- Users and Groups  
+- Realms and Clients  
+- Components, Roles, and Mappings  
+- User Storage Providers  
+- OpenID Configuration  
+- Client Scopes, Protocol Mappers, and more
 
 Each feature is encapsulated in its respective folder with a dedicated `KeycloakClient.cs`, allowing for organized extensions and maintenance.
 
 ---
 
-## 🚀 Usage Example
+##  Usage Example
 
 ```csharp
 using Keycloak.ApiClient.Net;
@@ -70,17 +70,17 @@ foreach (var user in users)
 
 ---
 
-## 🧪 Testing
+##  Testing
 
 To run the tests:
 
 ```powershell
-.uild	est.ps1
+.\build\test.ps1
 ```
 
 ---
 
-## 🔐 Security
+##  Security
 
 - Certificates are managed via `ClientAttributeCertificate`  
 - Supports token-based authentication, introspection, and permission configuration  
@@ -88,7 +88,7 @@ To run the tests:
 
 ---
 
-## 📖 Documentation
+##  Documentation
 
 Detailed documentation is available in the source code and test cases.  
 Key features and examples are also documented in this README.
@@ -98,7 +98,7 @@ For full API reference:
 
 ---
 
-## 🆕 New in 2.0.0
+##  New in 2.0.0
 
 - **Improved Authentication**: `GetBaseUrl` now supports an optional `withAuthentication` parameter to handle endpoints without token concatenation.
 - **Robust Models**: `User.cs` updated with `List<string>` for `DisableableCredentialTypes` and `RequiredActions`; fixed `Credentials`, aligned with `UserRepresentation`.
@@ -108,7 +108,7 @@ For full API reference:
 
 ---
 
-## 🧑‍💻 Contributing
+##  Contributing
 
 Contributions are welcome! To contribute:
 
@@ -127,24 +127,23 @@ Contributions are welcome! To contribute:
 
 ---
 
-## 📄 License
+##  License
 
 MIT
 
 ---
 
-## 🏷️ References
+##  References
 
 - [Keycloak Admin REST API Documentation](https://www.keycloak.org/docs-api/)  
 - [Keycloak Server Documentation](https://www.keycloak.org/documentation.html)
 
 ---
 
-## 📝 Changelog
+##  Changelog
 
 **Version 2.0.0**
 
-- Translated README to Portuguese and English with installation, requirements, and usage examples  
 - Enhanced `GetBaseUrl` in `KeycloakClient.cs` with optional `withAuthentication` parameter  
 - Updated API calls to use `IFlurlResponse` for compatibility with `Flurl.Http 4.0`  
 - Replaced `dynamic` with `CountResponse` in methods like `GetClientOfflineSessionCountAsync`  
