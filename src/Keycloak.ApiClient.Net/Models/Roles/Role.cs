@@ -13,13 +13,13 @@ namespace Keycloak.ApiClient.Net.Models.Roles
         public string Description { get; set; }
         [JsonProperty("composite")]
         public bool? Composite { get; set; }
-        [JsonProperty("composites")]
-        public RoleComposite Composites { get; set; }
+        //[JsonProperty("composites")]
+        //public RoleComposite Composites { get; set; }
         [JsonProperty("clientRole")]
         public bool? ClientRole { get; set; }
         [JsonProperty("containerId")]
         public string ContainerId { get; set; }
         [JsonProperty("attributes")]
-        public IDictionary<string, object> Attributes { get; set; }
+        public IDictionary<string, List<string>> Attributes { get; set; }
     }
 }

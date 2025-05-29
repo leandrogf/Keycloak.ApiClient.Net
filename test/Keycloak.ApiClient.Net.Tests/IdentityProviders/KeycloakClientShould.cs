@@ -7,7 +7,7 @@ namespace Keycloak.ApiClient.Net.Tests
     public partial class KeycloakClientShould
     {
         [Theory]
-        [InlineData("master")]
+        [InlineData("test")]
         public async Task GetIdentityProviderInstancesAsync(string realm)
         {
             var result = await _client.GetIdentityProviderInstancesAsync(realm).ConfigureAwait(false);
@@ -15,7 +15,7 @@ namespace Keycloak.ApiClient.Net.Tests
         }
 
         [Theory]
-        [InlineData("master")]
+        [InlineData("test")]
         public async Task GetIdentityProviderAsync(string realm)
         {
             var identityProviderInstances = await _client.GetIdentityProviderInstancesAsync(realm).ConfigureAwait(false);
@@ -28,7 +28,7 @@ namespace Keycloak.ApiClient.Net.Tests
         }
 
         //[Theory]
-        //[InlineData("Insurance")]
+        //[InlineData("test")]
         //public async Task GetIdentityProviderTokenAsync(string realm)
         //{
         //    var token = await _client.GetIdentityProviderTokenAsync(realm).ConfigureAwait(false);
@@ -36,7 +36,7 @@ namespace Keycloak.ApiClient.Net.Tests
         //}
 
         [Theory]
-        [InlineData("master")]
+        [InlineData("test")]
         public async Task GetIdentityProviderAuthorizationPermissionsInitializedAsync(string realm)
         {
             var identityProviderInstances = await _client.GetIdentityProviderInstancesAsync(realm).ConfigureAwait(false);
@@ -49,7 +49,7 @@ namespace Keycloak.ApiClient.Net.Tests
         }
 
         [Theory(Skip = "500 Internal server error")]
-        [InlineData("master")]
+        [InlineData("test")]
         public async Task GetIdentityProviderMapperTypesAsync(string realm)
         {
             var identityProviderInstances = await _client.GetIdentityProviderInstancesAsync(realm).ConfigureAwait(false);
@@ -62,7 +62,7 @@ namespace Keycloak.ApiClient.Net.Tests
         }
 
         [Theory]
-        [InlineData("master")]
+        [InlineData("test")]
         public async Task GetIdentityProviderMappersAsync(string realm)
         {
             var identityProviderInstances = await _client.GetIdentityProviderInstancesAsync(realm).ConfigureAwait(false);
@@ -75,7 +75,7 @@ namespace Keycloak.ApiClient.Net.Tests
         }
 
         [Theory]
-        [InlineData("master")]
+        [InlineData("test")]
         public async Task GetIdentityProviderMapperByIdAsync(string realm)
         {
             var identityProviderInstances = await _client.GetIdentityProviderInstancesAsync(realm).ConfigureAwait(false);
@@ -93,7 +93,7 @@ namespace Keycloak.ApiClient.Net.Tests
         }
 
         [Theory]
-        [InlineData("master")]
+        [InlineData("test")]
         public async Task GetIdentityProviderByProviderIdAsync(string realm)
         {
             var identityProviderInstances = await _client.GetIdentityProviderInstancesAsync(realm).ConfigureAwait(false);

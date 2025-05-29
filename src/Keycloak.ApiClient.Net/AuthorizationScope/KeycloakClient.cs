@@ -9,11 +9,11 @@ namespace Keycloak.ApiClient.Net
     {
         public async Task<bool> CreateAuthorizationScopeAsync(string realm, string resourceServerId, AuthorizationScope scope)
         {
-            var response = await GetBaseUrl(realm)
+            var response = await GetBaseUrl(realm, true)
                 .AppendPathSegment($"/admin/realms/{realm}/clients/{resourceServerId}/authz/resource-server/scope")
                 .PostJsonAsync(scope)
                 .ConfigureAwait(false);
-            return response.IsSuccessStatusCode;
+            return response.ResponseMessage.IsSuccessStatusCode;
         }
 
         public async Task<IEnumerable<AuthorizationScope>> GetAuthorizationScopesAsync(string realm, string resourceServerId = null, 
@@ -27,34 +27,34 @@ namespace Keycloak.ApiClient.Net
                 [nameof(name)] = name,
             };
             
-            return await GetBaseUrl(realm)
+            return await GetBaseUrl(realm, true)
                 .AppendPathSegment($"/admin/realms/{realm}/clients/{resourceServerId}/authz/resource-server/scope")
                 .SetQueryParams(queryParams)
                 .GetJsonAsync<IEnumerable<AuthorizationScope>>()
                 .ConfigureAwait(false);
         }
 
-        public async Task<AuthorizationScope> GetAuthorizationScopeAsync(string realm, string resourceServerId, string scopeId) => await GetBaseUrl(realm)
+        public async Task<AuthorizationScope> GetAuthorizationScopeAsync(string realm, string resourceServerId, string scopeId) => await GetBaseUrl(realm, true)
             .AppendPathSegment($"/admin/realms/{realm}/clients/{resourceServerId}/authz/resource-server/scope/{scopeId}")
             .GetJsonAsync<AuthorizationScope>()
             .ConfigureAwait(false);
 
         public async Task<bool> UpdateAuthorizationScopeAsync(string realm, string resourceServerId, string scopeId, AuthorizationScope scope)
         {
-            var response = await GetBaseUrl(realm)
+            var response = await GetBaseUrl(realm, true)
                 .AppendPathSegment($"/admin/realms/{realm}/clients/{resourceServerId}/authz/resource-server/scope/{scopeId}")
                 .PutJsonAsync(scope)
                 .ConfigureAwait(false);
-            return response.IsSuccessStatusCode;
+            return response.ResponseMessage.IsSuccessStatusCode;
         }
 
         public async Task<bool> DeleteAuthorizationScopeAsync(string realm, string resourceServerId, string scopeId)
         {
-            var response = await GetBaseUrl(realm)
+            var response = await GetBaseUrl(realm, true)
                 .AppendPathSegment($"/admin/realms/{realm}/clients/{resourceServerId}/authz/resource-server/scope/{scopeId}")
                 .DeleteAsync()
                 .ConfigureAwait(false);
-            return response.IsSuccessStatusCode;
+            return response.ResponseMessage.IsSuccessStatusCode;
         }
     }
 }

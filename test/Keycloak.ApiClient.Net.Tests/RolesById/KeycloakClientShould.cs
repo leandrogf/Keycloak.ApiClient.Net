@@ -7,7 +7,7 @@ namespace Keycloak.ApiClient.Net.Tests
     public partial class KeycloakClientShould
     {
         [Theory]
-        [InlineData("master")]
+        [InlineData("test")]
         public async Task GetRoleByIdAsync(string realm)
         {
             var roles = await _client.GetRolesAsync(realm).ConfigureAwait(false);
@@ -20,7 +20,7 @@ namespace Keycloak.ApiClient.Net.Tests
         }
 
         [Theory]
-        [InlineData("master")]
+        [InlineData("test")]
         public async Task GetRoleChildrenAsync(string realm)
         {
             var roles = await _client.GetRolesAsync(realm).ConfigureAwait(false);
@@ -33,7 +33,7 @@ namespace Keycloak.ApiClient.Net.Tests
         }
 
         [Theory]
-        [InlineData("Insurance", "insurance-product")]
+        [InlineData("test", "insurance-test")]
         public async Task GetClientRolesForCompositeByIdAsync(string realm, string clientId)
         {
             var roles = await _client.GetRolesAsync(realm).ConfigureAwait(false);
@@ -51,7 +51,7 @@ namespace Keycloak.ApiClient.Net.Tests
         }
 
         [Theory]
-        [InlineData("master")]
+        [InlineData("test")]
         public async Task GetRealmRolesForCompositeByIdAsync(string realm)
         {
             var roles = await _client.GetRolesAsync(realm).ConfigureAwait(false);
@@ -63,8 +63,8 @@ namespace Keycloak.ApiClient.Net.Tests
             }
         }
 
-        [Theory]
-        [InlineData("master")]
+        [Theory(Skip = "501 Not Implemented")]
+        [InlineData("test")]
         public async Task GetRoleByIdAuthorizationPermissionsInitializedAsync(string realm)
         {
             var roles = await _client.GetRolesAsync(realm).ConfigureAwait(false);

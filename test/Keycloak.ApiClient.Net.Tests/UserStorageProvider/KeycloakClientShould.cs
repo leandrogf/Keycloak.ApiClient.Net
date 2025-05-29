@@ -6,7 +6,7 @@ namespace Keycloak.ApiClient.Net.Tests
     public partial class KeycloakClientShould
     {
         [Theory(Skip = "Not working yet")]
-        [InlineData("master")]
+        [InlineData("test")]
         public async Task TriggerUserSynchronizationAsync(string realm)
         {
             string storageProviderId = "";
@@ -15,7 +15,7 @@ namespace Keycloak.ApiClient.Net.Tests
         }
 
         [Theory(Skip = "Not working yet")]
-        [InlineData("master")]
+        [InlineData("test")]
         public async Task TriggerLdapMapperSynchronizationAsync(string realm)
         {
             string storageProviderId = "";

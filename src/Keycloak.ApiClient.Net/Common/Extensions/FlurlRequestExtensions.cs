@@ -6,12 +6,20 @@ using Flurl.Http;
 
 namespace Keycloak.ApiClient.Net.Common.Extensions
 {
+    public class TokenResponse
+    {
+        public string access_token { get; set; }
+        // Propriedades adicionais, se necessário
+        // public string refresh_token { get; set; }
+        // public int expires_in { get; set; }
+    }
+
     public static class FlurlRequestExtensions
     {
         private static async Task<string> GetAccessTokenAsync(string url, string realm, string userName, string password)
         {
             var result = await url
-                .AppendPathSegment($"/auth/realms/{realm}/protocol/openid-connect/token")
+                .AppendPathSegment($"/realms/{realm}/protocol/openid-connect/token")
                 .WithHeader("Accept", "application/json")
                 .PostUrlEncodedAsync(new List<KeyValuePair<string, string>>
                 {
@@ -20,20 +28,18 @@ namespace Keycloak.ApiClient.Net.Common.Extensions
                     new KeyValuePair<string, string>("password", password),
                     new KeyValuePair<string, string>("client_id", "admin-cli")
                 })
-                .ReceiveJson().ConfigureAwait(false);
+                .ReceiveJson<TokenResponse>().ConfigureAwait(false);
 
-            string accessToken = result
-                .access_token.ToString();
-
-            return accessToken;
+            return result.access_token;
         }
 
-        private static string GetAccessToken(string url, string realm, string userName, string password) => GetAccessTokenAsync(url, realm, userName, password).GetAwaiter().GetResult();
+        private static string GetAccessToken(string url, string realm, string userName, string password) =>
+            GetAccessTokenAsync(url, realm, userName, password).GetAwaiter().GetResult();
 
         private static async Task<string> GetAccessTokenAsync(string url, string realm, string clientSecret)
         {
             var result = await url
-                .AppendPathSegment($"/auth/realms/{realm}/protocol/openid-connect/token")
+                .AppendPathSegment($"/realms/{realm}/protocol/openid-connect/token")
                 .WithHeader("Content-Type", "application/x-www-form-urlencoded")
                 .PostUrlEncodedAsync(new List<KeyValuePair<string, string>>
                 {
@@ -41,15 +47,13 @@ namespace Keycloak.ApiClient.Net.Common.Extensions
                     new KeyValuePair<string, string>("client_secret", clientSecret),
                     new KeyValuePair<string, string>("client_id", "admin-cli")
                 })
-                .ReceiveJson().ConfigureAwait(false);
+                .ReceiveJson<TokenResponse>().ConfigureAwait(false);
 
-            string accessToken = result
-                .access_token.ToString();
-
-            return accessToken;
+            return result.access_token;
         }
 
-        private static string GetAccessToken(string url, string realm, string clientSecret) => GetAccessTokenAsync(url, realm, clientSecret).GetAwaiter().GetResult();
+        private static string GetAccessToken(string url, string realm, string clientSecret) =>
+            GetAccessTokenAsync(url, realm, clientSecret).GetAwaiter().GetResult();
 
         public static IFlurlRequest WithAuthentication(this IFlurlRequest request, Func<string> getToken, string url, string realm, string userName, string password, string clientSecret)
         {
@@ -75,17 +79,17 @@ namespace Keycloak.ApiClient.Net.Common.Extensions
         {
             if (!string.IsNullOrEmpty(forwardedHeaders?.forwardedFor))
             {
-	            request = request.WithHeader("X-Forwarded-For", forwardedHeaders.forwardedFor);
+                request = request.WithHeader("X-Forwarded-For", forwardedHeaders.forwardedFor);
             }
 
             if (!string.IsNullOrEmpty(forwardedHeaders?.forwardedProto))
             {
-	            request = request.WithHeader("X-Forwarded-Proto", forwardedHeaders.forwardedProto);
+                request = request.WithHeader("X-Forwarded-Proto", forwardedHeaders.forwardedProto);
             }
 
             if (!string.IsNullOrEmpty(forwardedHeaders?.forwardedHost))
             {
-	            request = request.WithHeader("X-Forwarded-Host", forwardedHeaders.forwardedHost);
+                request = request.WithHeader("X-Forwarded-Host", forwardedHeaders.forwardedHost);
             }
 
             return request;

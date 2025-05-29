@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Flurl;
 using Flurl.Http;
 using Flurl.Http.Configuration;
+using Flurl.Http.Newtonsoft;
 using Keycloak.ApiClient.Net.Common.Extensions;
+using Keycloak.ApiClient.Net.Models.AuthenticationManagement;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
@@ -22,9 +25,14 @@ namespace Keycloak.ApiClient.Net
         private readonly string _clientSecret;
         private readonly Func<string> _getToken;
 
+        public static string KeycloakDefaultClientName { get; } = "default";
+        public static string KeycloakAuthenticateClientName { get; } = "authentication";
+
         private KeycloakClient(string url)
         {
             _url = url;
+
+            FlurlHttp.Clients.GetOrAdd(KeycloakDefaultClientName, url);
         }
 
         public KeycloakClient(string url, string userName, string password)
@@ -51,9 +59,26 @@ namespace Keycloak.ApiClient.Net
             _serializer = serializer ?? throw new ArgumentNullException(nameof(serializer));
         }
 
-        private IFlurlRequest GetBaseUrl(string authenticationRealm) => new Url(_url)
-            .AppendPathSegment("/auth")
-            .ConfigureRequest(settings => settings.JsonSerializer = _serializer)
-            .WithAuthentication(_getToken, _url, authenticationRealm, _userName, _password, _clientSecret);
+        private IFlurlRequest GetBaseUrl(string authenticationRealm, string clientName = null)
+        {
+            return GetBaseUrl(authenticationRealm, withAuthentication: true, clientName);
+        }
+
+        // Fix for CS1729: "FlurlRequest" does not contain a constructor that accepts 2 arguments.
+        // The error occurs because the `FlurlRequest` class does not have a constructor that accepts both `client` and `url`.
+        // Instead, the `Request` method of `IFlurlClient` should be used to create a request.
+
+        private IFlurlRequest GetBaseUrl(string authenticationRealm, bool withAuthentication = true, string clientName = null)
+        {
+            clientName ??= KeycloakDefaultClientName;
+            var client = FlurlHttp.Clients.Get(clientName); // Fix: Use Get method instead of indexer
+            var request = client.Request(_url); // Fix: Use the Request method of IFlurlClient to create a FlurlRequest
+            if (withAuthentication)
+            {
+                return request
+                    .WithAuthentication(_getToken, _url, authenticationRealm, _userName, _password, _clientSecret);
+            }
+            return request;
+        }
     }
 }

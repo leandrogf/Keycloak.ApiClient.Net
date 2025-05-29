@@ -6,7 +6,7 @@ namespace Keycloak.ApiClient.Net
 {
     public partial class KeycloakClient
     {
-        public async Task<KeysMetadata> GetKeysAsync(string realm) => await GetBaseUrl(realm)
+        public async Task<KeysMetadata> GetKeysAsync(string realm) => await GetBaseUrl(realm, true)
             .AppendPathSegment($"/admin/realms/{realm}/keys")
             .GetJsonAsync<KeysMetadata>()
             .ConfigureAwait(false);

@@ -12,19 +12,22 @@ namespace Keycloak.ApiClient.Net.Models.Common
         [JsonProperty("label")]
         public string Label { get; set; }
 
-        [JsonProperty("helpText")]
-        public string HelpText { get; set; }
-
         [JsonProperty("type")]
-        public JsonTypeLabel Type { get; set; }
-
-        [JsonProperty("secret")]
-        public bool? Secret { get; set; }
+        public string Type { get; set; }
 
         [JsonProperty("defaultValue")]
-        public string DefaultValue { get; set; }
+        public object DefaultValue { get; set; }
 
         [JsonProperty("options")]
         public List<string> Options { get; set; }
+
+        [JsonProperty("helpText")]
+        public string HelpText { get; set; }
+
+        [JsonProperty("secret")]
+        public bool Secret { get; set; }
+
+        [JsonProperty("required")]
+        public bool Required { get; set; }
     }
 }

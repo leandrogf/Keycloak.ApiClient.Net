@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using Microsoft.Extensions.Configuration;
+using static System.Net.WebRequestMethods;
 
 namespace Keycloak.ApiClient.Net.Tests
 {
@@ -14,9 +15,18 @@ namespace Keycloak.ApiClient.Net.Tests
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .Build();
 
-            string url = configuration["url"];
-            string userName = configuration["userName"];
-            string password = configuration["password"];
+            //var client = new KeycloakClient(new KeycloakOptions
+            //{
+            //    BaseUrl = "https://keycloak.meureino.com",
+            //    Realm = "master",
+            //    ClientId = "admin-cli",
+            //    Username = "admin",
+            //    Password = "senha123"
+            //});
+
+            string url = configuration["url"] ?? "https://accounts.mliberty.com.br/";
+            string userName = configuration["userName"] ?? "test";
+            string password = configuration["password"] ?? "usuario_para_teste";
 
             _client = new KeycloakClient(url, userName, password);
         }

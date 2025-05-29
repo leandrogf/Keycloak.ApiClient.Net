@@ -7,7 +7,7 @@ namespace Keycloak.ApiClient.Net.Tests
     public partial class KeycloakClientShould
     {
         [Theory]
-        [InlineData("master")]
+        [InlineData("test")]
         public async Task GetGroupHierarchyAsync(string realm)
         {
             var result = await _client.GetGroupHierarchyAsync(realm).ConfigureAwait(false);
@@ -15,15 +15,15 @@ namespace Keycloak.ApiClient.Net.Tests
         }
 
         [Theory]
-        [InlineData("master")]
+        [InlineData("test")]
         public async Task GetGroupsCountAsync(string realm)
         {
-            int? result = await _client.GetGroupsCountAsync(realm);
+            long result = await _client.GetGroupsCountAsync(realm);
             Assert.True(result >= 0);
         }
 
         [Theory]
-        [InlineData("master")]
+        [InlineData("test")]
         public async Task GetGroupAsync(string realm)
         {
             var groups = await _client.GetGroupHierarchyAsync(realm).ConfigureAwait(false);
@@ -36,7 +36,7 @@ namespace Keycloak.ApiClient.Net.Tests
         }
         
         [Theory]
-        [InlineData("master")]
+        [InlineData("test")]
         public async Task GetGroupClientAuthorizationPermissionsInitializedAsync(string realm)
         {
             var groups = await _client.GetGroupHierarchyAsync(realm).ConfigureAwait(false);
@@ -49,7 +49,7 @@ namespace Keycloak.ApiClient.Net.Tests
         }
 
         [Theory]
-        [InlineData("master")]
+        [InlineData("test")]
         public async Task GetGroupUsersAsync(string realm)
         {
             var groups = await _client.GetGroupHierarchyAsync(realm).ConfigureAwait(false);

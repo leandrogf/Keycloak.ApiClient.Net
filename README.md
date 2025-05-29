@@ -1,32 +1,92 @@
-![Icon](./icon.png)
-# Keycloak.ApiClient.Net 
-[![Build status](https://ci.appveyor.com/api/projects/status/c9npduu2dp9ljlps?svg=true)](https://ci.appveyor.com/project/lvermeulen/keycloak-net)
- [![license](https://img.shields.io/github/license/lvermeulen/Keycloak.ApiClient.Net.svg?maxAge=2592000)](https://github.com/lvermeulen/Keycloak.ApiClient.Net/blob/master/LICENSE) [![NuGet](https://img.shields.io/nuget/v/Keycloak.ApiClient.Net.svg?maxAge=2592000)](https://www.nuget.org/packages/Keycloak.ApiClient.Net/) ![downloads](https://img.shields.io/nuget/dt/Keycloak.ApiClient.Net)
- ![](https://img.shields.io/badge/.net-4.5.2-yellowgreen.svg) ![](https://img.shields.io/badge/netstandard-1.4-yellowgreen.svg) [![FOSSA Status](https://app.fossa.com/api/projects/custom%2B11767%2Fgithub.com%2Flvermeulen%2FKeycloak.ApiClient.Net.svg?type=shield)](https://app.fossa.com/projects/custom%2B11767%2Fgithub.com%2Flvermeulen%2FKeycloak.ApiClient.Net?ref=badge_shield)
+# Keycloak.ApiClient.Net
 
-C# client for [Keycloak](https://www.keycloak.org/)
-See documentation at [Keycloak API Documentation](https://www.keycloak.org/docs-api/latest/rest-api/index.html)
+Cliente .NET para integração com a API do Keycloak. Este projeto facilita o consumo das funcionalidades administrativas do Keycloak por meio de uma interface fluente e orientada a recursos.
 
-## Features
-* [X] Attack Detection
-* [X] Authentication Management
-* [X] Client Attribute Certificate
-* [X] Client Initial Access
-* [X] Client Registration Policy
-* [X] Client Role Mappings
-* [X] Client Scopes
-* [X] Clients
-* [X] Component
-* [X] Groups
-* [X] Identity Providers
-* [X] Key
-* [X] Protocol Mappers
-* [X] Realms Admin
-* [X] Role Mapper
-* [X] Roles
-* [X] Roles (by ID)
-* [X] Scope Mappings
-* [X] User Storage Provider
-* [X] Users
-* [X] Root
+![.NET](https://img.shields.io/badge/.NET-6.0%2B-blue)
+![Keycloak](https://img.shields.io/badge/Keycloak-API-green)
+![Build](https://img.shields.io/appveyor/build/username/Keycloak.ApiClient.Net)
 
+## 📦 Instalação
+
+Disponível via [NuGet](https://www.nuget.org/):
+
+```bash
+dotnet add package Keycloak.ApiClient.Net
+```
+
+## ⚙️ Requisitos
+
+- .NET 6.0 ou superior
+- Keycloak 17 ou superior (com suporte ao Admin REST API)
+
+## 📁 Estrutura do Projeto
+
+- `src/Keycloak.ApiClient.Net`: Código-fonte principal do cliente
+- `test/Keycloak.ApiClient.Net.Tests`: Testes unitários e de integração
+- `build/`: Scripts para automação de build e testes (`build.ps1`, `test.ps1`)
+
+## 🔧 Funcionalidades Suportadas
+
+Este cliente cobre grande parte dos recursos administrativos do Keycloak:
+
+- 🔐 **Autenticação e Autorização**
+- 👤 **Usuários e Grupos**
+- 🧑‍🤝‍🧑 **Realms e Clientes**
+- 🔑 **Componentes, Roles, Mapeamentos**
+- 🗝️ **Providers de Armazenamento**
+- 📜 **OpenID Configuration**
+- 📂 **Client Scopes, Protocol Mappers e mais**
+
+Cada recurso é encapsulado em sua própria pasta com o respectivo `KeycloakClient.cs`, permitindo extensões e manutenção organizadas.
+
+## 🚀 Exemplo de Uso
+
+```csharp
+var client = new KeycloakClient(new KeycloakOptions {
+    BaseUrl = "https://keycloak.meureino.com",
+    Realm = "master",
+    ClientId = "admin-cli",
+    Username = "admin",
+    Password = "senha123"
+});
+
+// Listar usuários
+var users = await client.Users.GetUsersAsync();
+```
+
+## 🧪 Testes
+
+Para rodar os testes:
+
+```bash
+.uild	est.ps1
+```
+
+## 🔐 Segurança
+
+- Certificados podem ser gerenciados via `ClientAttributeCertificate`
+- Suporte a tokens, introspecção e configuração de permissões
+
+## 📖 Documentação
+
+A documentação detalhada será adicionada em breve. Por ora, consulte os exemplos nos testes e no código-fonte.
+
+## 🧑‍💻 Contribuindo
+
+Pull requests são bem-vindos! Para contribuir:
+
+1. Fork o repositório
+2. Crie uma branch: `git checkout -b feature/NovaFuncionalidade`
+3. Commit suas mudanças: `git commit -am 'Adiciona nova funcionalidade'`
+4. Envie um PR
+
+## 📄 Licença
+
+[MIT](LICENSE)
+
+---
+
+## 🏷️ Referências
+
+- [Keycloak Admin REST API Docs](https://www.keycloak.org/docs-api/)
+- [Keycloak Server Docs](https://www.keycloak.org/documentation)

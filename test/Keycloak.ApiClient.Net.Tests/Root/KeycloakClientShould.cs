@@ -6,7 +6,7 @@ namespace Keycloak.ApiClient.Net.Tests
     public partial class KeycloakClientShould
     {
         [Theory]
-        [InlineData("master")]
+        [InlineData("test")]
         public async Task GetServerInfoAsync(string realm)
         {
             var result = await _client.GetServerInfoAsync(realm).ConfigureAwait(false);
@@ -14,7 +14,7 @@ namespace Keycloak.ApiClient.Net.Tests
         }
 
         [Theory]
-        [InlineData("master")]
+        [InlineData("test")]
         public async Task CorsPreflightAsync(string realm)
         {
             bool? result = await _client.CorsPreflightAsync(realm);

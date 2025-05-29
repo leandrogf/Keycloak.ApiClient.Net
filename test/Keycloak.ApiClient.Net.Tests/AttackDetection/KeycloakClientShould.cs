@@ -7,7 +7,7 @@ namespace Keycloak.ApiClient.Net.Tests
     public partial class KeycloakClientShould
     {
         [Theory]
-        [InlineData("Insurance", "vermeulen")]
+        [InlineData("test", "vermeulen")]
         public async Task GetUserNameStatusInBruteForceDetectionAsync(string realm, string search)
         {
             var users = await _client.GetUsersAsync(realm, search: search).ConfigureAwait(false);
