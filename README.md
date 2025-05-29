@@ -1,92 +1,154 @@
-# Keycloak.ApiClient.Net
 
-Cliente .NET para integração com a API do Keycloak. Este projeto facilita o consumo das funcionalidades administrativas do Keycloak por meio de uma interface fluente e orientada a recursos.
+# Keycloak.ApiClient.Net 2.0.0
 
-![.NET](https://img.shields.io/badge/.NET-6.0%2B-blue)
-![Keycloak](https://img.shields.io/badge/Keycloak-API-green)
-![Build](https://img.shields.io/appveyor/build/username/Keycloak.ApiClient.Net)
-
-## 📦 Instalação
-
-Disponível via [NuGet](https://www.nuget.org/):
-
-```bash
-dotnet add package Keycloak.ApiClient.Net
-```
-
-## ⚙️ Requisitos
-
-- .NET 6.0 ou superior
-- Keycloak 17 ou superior (com suporte ao Admin REST API)
-
-## 📁 Estrutura do Projeto
-
-- `src/Keycloak.ApiClient.Net`: Código-fonte principal do cliente
-- `test/Keycloak.ApiClient.Net.Tests`: Testes unitários e de integração
-- `build/`: Scripts para automação de build e testes (`build.ps1`, `test.ps1`)
-
-## 🔧 Funcionalidades Suportadas
-
-Este cliente cobre grande parte dos recursos administrativos do Keycloak:
-
-- 🔐 **Autenticação e Autorização**
-- 👤 **Usuários e Grupos**
-- 🧑‍🤝‍🧑 **Realms e Clientes**
-- 🔑 **Componentes, Roles, Mapeamentos**
-- 🗝️ **Providers de Armazenamento**
-- 📜 **OpenID Configuration**
-- 📂 **Client Scopes, Protocol Mappers e mais**
-
-Cada recurso é encapsulado em sua própria pasta com o respectivo `KeycloakClient.cs`, permitindo extensões e manutenção organizadas.
-
-## 🚀 Exemplo de Uso
-
-```csharp
-var client = new KeycloakClient(new KeycloakOptions {
-    BaseUrl = "https://keycloak.meureino.com",
-    Realm = "master",
-    ClientId = "admin-cli",
-    Username = "admin",
-    Password = "senha123"
-});
-
-// Listar usuários
-var users = await client.Users.GetUsersAsync();
-```
-
-## 🧪 Testes
-
-Para rodar os testes:
-
-```bash
-.uild	est.ps1
-```
-
-## 🔐 Segurança
-
-- Certificados podem ser gerenciados via `ClientAttributeCertificate`
-- Suporte a tokens, introspecção e configuração de permissões
-
-## 📖 Documentação
-
-A documentação detalhada será adicionada em breve. Por ora, consulte os exemplos nos testes e no código-fonte.
-
-## 🧑‍💻 Contribuindo
-
-Pull requests são bem-vindos! Para contribuir:
-
-1. Fork o repositório
-2. Crie uma branch: `git checkout -b feature/NovaFuncionalidade`
-3. Commit suas mudanças: `git commit -am 'Adiciona nova funcionalidade'`
-4. Envie um PR
-
-## 📄 Licença
-
-[MIT](LICENSE)
+**.NET client for integrating with the Keycloak Admin REST API.**  
+This project provides a fluent and resource-oriented interface for managing Keycloak's administrative features.
 
 ---
 
-## 🏷️ Referências
+## 📦 Installation
 
-- [Keycloak Admin REST API Docs](https://www.keycloak.org/docs-api/)
-- [Keycloak Server Docs](https://www.keycloak.org/documentation)
+Available via **NuGet**:
+
+```bash
+dotnet add package Keycloak.ApiClient.Net --version 2.0.0
+```
+
+Or via **Package Manager Console** in Visual Studio:
+
+```powershell
+Install-Package Keycloak.ApiClient.Net -Version 2.0.0
+```
+
+---
+
+## ⚙️ Requirements
+
+- .NET 9.0 or higher  
+- Keycloak 17 or higher (with Admin REST API support)
+
+---
+
+## 📁 Project Structure
+
+- `src/Keycloak.ApiClient.Net`: Core source code for the client  
+- `test/Keycloak.ApiClient.Net.Tests`: Unit and integration tests  
+- `build/`: Build and test automation scripts (`build.ps1`, `test.ps1`)
+
+---
+
+## 🔧 Supported Features
+
+The client covers a wide range of Keycloak administrative resources:
+
+- 🔐 Authentication and Authorization  
+- 👤 Users and Groups  
+- 🧑‍🤝‍🧑 Realms and Clients  
+- 🔑 Components, Roles, and Mappings  
+- 🗝️ User Storage Providers  
+- 📜 OpenID Configuration  
+- 📂 Client Scopes, Protocol Mappers, and more
+
+Each feature is encapsulated in its respective folder with a dedicated `KeycloakClient.cs`, allowing for organized extensions and maintenance.
+
+---
+
+## 🚀 Usage Example
+
+```csharp
+using Keycloak.ApiClient.Net;
+
+var client = new KeycloakClient("https://keycloak.example.com", "admin", "password");
+
+// List users in a realm
+var users = await client.GetUsersAsync("master");
+foreach (var user in users)
+{
+    Console.WriteLine($"User: {user.Username}");
+}
+```
+
+---
+
+## 🧪 Testing
+
+To run the tests:
+
+```powershell
+.uild	est.ps1
+```
+
+---
+
+## 🔐 Security
+
+- Certificates are managed via `ClientAttributeCertificate`  
+- Supports token-based authentication, introspection, and permission configuration  
+- Enhanced OAuth2 flow handling with secure token management
+
+---
+
+## 📖 Documentation
+
+Detailed documentation is available in the source code and test cases.  
+Key features and examples are also documented in this README.
+
+For full API reference:  
+**[Keycloak Admin REST API Documentation](https://www.keycloak.org/docs-api/)**
+
+---
+
+## 🆕 New in 2.0.0
+
+- **Improved Authentication**: `GetBaseUrl` now supports an optional `withAuthentication` parameter to handle endpoints without token concatenation.
+- **Robust Models**: `User.cs` updated with `List<string>` for `DisableableCredentialTypes` and `RequiredActions`; fixed `Credentials`, aligned with `UserRepresentation`.
+- **New Models**: `CountResponse`, `ManagementPermissionReference`, `ComponentTypeRepresentation`, `ConfigPropertyRepresentation`.
+- **Error Handling**: Improved support for HTTP status codes like `501 Not Implemented`.
+- **NuGet Dependencies**: Updated to `Flurl.Http 4.0.2`, `Flurl.Http.Newtonsoft`, `Newtonsoft.Json 13.0.3`.
+
+---
+
+## 🧑‍💻 Contributing
+
+Contributions are welcome! To contribute:
+
+1. Fork the repository  
+2. Create a branch:  
+   ```bash
+   git checkout -b feature/NewFeature
+   ```
+3. Commit your changes:  
+   ```bash
+   git commit -am 'Add new feature'
+   ```
+4. Submit a pull request
+
+**Please make sure all tests pass and follow the existing coding style.**
+
+---
+
+## 📄 License
+
+MIT
+
+---
+
+## 🏷️ References
+
+- [Keycloak Admin REST API Documentation](https://www.keycloak.org/docs-api/)  
+- [Keycloak Server Documentation](https://www.keycloak.org/documentation.html)
+
+---
+
+## 📝 Changelog
+
+**Version 2.0.0**
+
+- Translated README to Portuguese and English with installation, requirements, and usage examples  
+- Enhanced `GetBaseUrl` in `KeycloakClient.cs` with optional `withAuthentication` parameter  
+- Updated API calls to use `IFlurlResponse` for compatibility with `Flurl.Http 4.0`  
+- Replaced `dynamic` with `CountResponse` in methods like `GetClientOfflineSessionCountAsync`  
+- Fixed `User.cs` by aligning with `UserRepresentation` and resolving deserialization issues  
+- Added models: `CountResponse`, `ManagementPermissionReference`, `ComponentTypeRepresentation`, `ConfigPropertyRepresentation`  
+- Adjusted tests in `KeycloakClientShould.cs` for authentication changes and error handling  
+- Updated NuGet packages and improved documentation with new features and examples
