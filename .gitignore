@@ -330,3 +330,4 @@ ASALocalRun/
 .mfractor/
 /test/Keycloak.ApiClient.Net.Tests/appsettings.json
 /src/Keycloak.ApiClient.Net/.fossa.yml
+/nupkg
