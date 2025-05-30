@@ -6,6 +6,7 @@ namespace Keycloak.ApiClient.Net.Tests
 {
     public partial class KeycloakClientShould
     {
+
         [Theory]
         [InlineData("test")]
         public async Task GetUsersAsync(string realm)
@@ -85,6 +86,39 @@ namespace Keycloak.ApiClient.Net.Tests
             {
                 var result = await _client.GetUserSessionsAsync(realm, userId).ConfigureAwait(false);
                 Assert.NotNull(result);
+            }
+        }
+        [Theory]
+        [InlineData("test", "user", "email@email.com")]
+        public async Task CreateUserAsync_ShouldCreateUser(string realm, string username, string email)
+        {
+            var user = new Models.Users.User
+            {
+                Username = username,
+                Email = email,
+                Enabled = true,
+                FirstName = "First Name",
+                LastName = "Last Name",
+                Credentials = new System.Collections.Generic.List<Models.Users.Credentials>
+                {
+                    new Models.Users.Credentials
+                    {
+                        Type = "password",
+                        Value = "secret_password",
+                        Temporary = false // Defina como false se não quiser que a senha seja temporária
+                    }
+                },
+            };
+
+            var response = await _client.CreateUserAsync(realm, user).ConfigureAwait(false);
+            Assert.NotNull(response);
+
+            // Cleanup: remover o usuário criado (opcional, se houver método disponível)
+            var users = await _client.GetUsersAsync(realm, search: username).ConfigureAwait(false);
+            var createdUser = users.FirstOrDefault(u => u.Username == username);
+            if (createdUser != null)
+            {
+                await _client.DeleteUserAsync(realm, createdUser.Id).ConfigureAwait(false);
             }
         }
     }

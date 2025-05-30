@@ -24,9 +24,10 @@ namespace Keycloak.ApiClient.Net.Tests
             //    Password = "senha123"
             //});
 
-            string url = configuration["url"] ?? "https://accounts.mliberty.com.br/";
-            string userName = configuration["userName"] ?? "test";
-            string password = configuration["password"] ?? "usuario_para_teste";
+            string url = configuration["MLA:BaseUrl"] ?? "https://accounts.mliberty.com.br/";
+            string userName = configuration["MLA:AdminUsername"] ?? "test";
+            string password = configuration["MLA:AdminPassword"] ?? "usuario_para_teste";
+            string clientSecret = configuration["MLA:ClientSecret"] ?? string.Empty;
 
             _client = new KeycloakClient(url, userName, password);
         }

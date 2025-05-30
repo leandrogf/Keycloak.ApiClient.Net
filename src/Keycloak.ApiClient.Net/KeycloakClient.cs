@@ -32,7 +32,11 @@ namespace Keycloak.ApiClient.Net
         {
             _url = url;
 
-            FlurlHttp.Clients.GetOrAdd(KeycloakDefaultClientName, url);
+            FlurlHttp.Clients.GetOrAdd(KeycloakDefaultClientName, url, c => c.Settings.JsonSerializer = new NewtonsoftJsonSerializer(new JsonSerializerSettings
+            {
+                ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore 
+            }));
         }
 
         public KeycloakClient(string url, string userName, string password)
