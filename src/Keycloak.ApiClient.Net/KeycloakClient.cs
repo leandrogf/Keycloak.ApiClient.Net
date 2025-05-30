@@ -54,6 +54,23 @@ namespace Keycloak.ApiClient.Net
             _getToken = getToken;
         }
 
+        public KeycloakClient(string url, string userName, string password, string clientSecret)
+            : this(url)
+        {
+            _userName = userName;
+            _password = password;
+            _clientSecret = clientSecret;
+        }
+
+        public KeycloakClient(string url, string userName, string password, string clientSecret, Func<string> getToken)
+            : this(url)
+        {
+            _userName = userName;
+            _password = password;
+            _clientSecret = clientSecret;
+            _getToken = getToken;
+        }
+
         public void SetSerializer(ISerializer serializer)
         {
             _serializer = serializer ?? throw new ArgumentNullException(nameof(serializer));
